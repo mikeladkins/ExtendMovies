@@ -27,8 +27,7 @@ class PopularMoviesAdapter(private val listener: PopularMoviesViewHolder.OnMovie
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: PopularMovie, newItem: PopularMovie): Boolean =
-                oldItem.id == newItem.id
-                && oldItem.title == newItem.title
+                oldItem.title == newItem.title
                 && oldItem.overview == newItem.overview
                 && oldItem.posterUrl == newItem.posterUrl
         }
