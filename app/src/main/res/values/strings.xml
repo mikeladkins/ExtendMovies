@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ExtendMovies</string>
+    <string name="revenue">Revenue</string>
+    <string name="release_date">Release Date</string>
+</resources>
