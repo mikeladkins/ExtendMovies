@@ -36,6 +36,8 @@ class TMDBPagingSource(private val service: TMDBService) : PagingSource<Int, Pop
             } else {
                 position + (params.loadSize / 20)
             }
+            println("MIKEL::position = $position")
+            println("MIKEL::page = ${response.body()?.page}")
             LoadResult.Page(
                 data = movies ?: listOf(),
                 // If we're on the starting page, don't go backwards

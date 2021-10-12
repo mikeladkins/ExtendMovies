@@ -47,11 +47,7 @@ class PopularMoviesFragment: Fragment(), PopularMoviesViewHolder.OnMovieClickLis
 
         // This should be moved somewhere else to prevent restarting the network call on device rotation
         // Not sure where yet
-        //if(viewModel.shouldLoad) {
         fetchPopularMovies()
-
-        //viewModel.shouldLoad = false
-        //}
 
         return view
     }
@@ -65,11 +61,11 @@ class PopularMoviesFragment: Fragment(), PopularMoviesViewHolder.OnMovieClickLis
     // And send them into our adapter
     private fun fetchPopularMovies() {
         lifecycleScope.launch {
-            //lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.fetchPopularMovies().collectLatest { data ->
                     adapter.submitData(data)
                 }
-           // }
+            }
         }
     }
 

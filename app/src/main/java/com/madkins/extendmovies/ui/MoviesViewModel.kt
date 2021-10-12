@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 class MoviesViewModel: ViewModel() {
     private val repo = TMDBRepo()
-    var shouldLoad = true
     var movieLiveData: LiveData<Movie> = MutableLiveData()
 
     fun fetchPopularMovies(): Flow<PagingData<PopularMovie>> {
