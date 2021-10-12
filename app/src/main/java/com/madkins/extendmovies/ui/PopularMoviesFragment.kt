@@ -2,6 +2,7 @@ package com.madkins.extendmovies.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.madkins.extendmovies.R
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
+private const val TAG = "PopularMoviesFragment"
+
 
 class PopularMoviesFragment: Fragment(), PopularMoviesViewHolder.OnMovieClickListener {
     interface Callbacks {
@@ -41,12 +45,16 @@ class PopularMoviesFragment: Fragment(), PopularMoviesViewHolder.OnMovieClickLis
 
         // This should be moved somewhere else to prevent restarting the network call on device rotation
         // Not sure where yet
-        fetchPopularMovies()
+        if(viewModel.shouldLoad) {
+            fetchPopularMovies()
+            viewModel.shouldLoad = false
+        }
 
         return view
     }
     override fun onDetach() {
         super.onDetach()
+        viewModel.shouldLoad = true
         callbacks = null
     }
 

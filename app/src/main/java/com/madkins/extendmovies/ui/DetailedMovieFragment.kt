@@ -1,6 +1,5 @@
 package com.madkins.extendmovies.ui
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,11 +17,8 @@ import com.madkins.extendmovies.repo.TMDBRepo
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
 
-const val TAG = "DetailedMovieFragment"
+private const val TAG = "DetailedMovieFragment"
 
 class DetailedMovieFragment: Fragment() {
     private val viewModel by activityViewModels<MoviesViewModel>()
