@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.madkins.extendmovies.R
@@ -45,16 +47,17 @@ class PopularMoviesFragment: Fragment(), PopularMoviesViewHolder.OnMovieClickLis
 
         // This should be moved somewhere else to prevent restarting the network call on device rotation
         // Not sure where yet
-        if(viewModel.shouldLoad) {
-            fetchPopularMovies()
-            viewModel.shouldLoad = false
-        }
+        //if(viewModel.shouldLoad) {
+        fetchPopularMovies()
+
+        //viewModel.shouldLoad = false
+        //}
 
         return view
     }
     override fun onDetach() {
         super.onDetach()
-        viewModel.shouldLoad = true
+        //viewModel.shouldLoad = true
         callbacks = null
     }
 
@@ -62,9 +65,11 @@ class PopularMoviesFragment: Fragment(), PopularMoviesViewHolder.OnMovieClickLis
     // And send them into our adapter
     private fun fetchPopularMovies() {
         lifecycleScope.launch {
-            viewModel.fetchPopularMovies().collectLatest { data ->
-                adapter.submitData(data)
-            }
+            //lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.fetchPopularMovies().collectLatest { data ->
+                    adapter.submitData(data)
+                }
+           // }
         }
     }
 

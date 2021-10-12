@@ -31,9 +31,10 @@ class TMDBPagingSource(private val service: TMDBService) : PagingSource<Int, Pop
             // Set the next key (i.e. next page value)
             // If current page is null, we're at the end
             // Otherwise, increment the page
-            val nextKey = when(val page = response.body()?.page) {
-                null -> null
-                else -> page + 1
+            val nextKey = if (movies?.isEmpty() == true) {
+                null
+            } else {
+                position + (params.loadSize / 20)
             }
             LoadResult.Page(
                 data = movies ?: listOf(),
