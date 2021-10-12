@@ -28,11 +28,10 @@ class TMDBPagingSource(private val service: TMDBService) : PagingSource<Int, Pop
             val response = service.fetchPopularMovies(position)
             // Get the popular movies from the response
             val movies = response.body()?.results
-            val page = response.body()?.page
             // Set the next key (i.e. next page value)
             // If current page is null, we're at the end
             // Otherwise, increment the page
-            val nextKey = when(page) {
+            val nextKey = when(val page = response.body()?.page) {
                 null -> null
                 else -> page + 1
             }
