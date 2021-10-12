@@ -11,13 +11,33 @@ import kotlinx.coroutines.flow.Flow
 
 class MoviesViewModel: ViewModel() {
     private val repo = TMDBRepo()
-    var movieLiveData: LiveData<Movie> = MutableLiveData()
+    var movieLiveData: MutableLiveData<Movie> = MutableLiveData()
+    var favoriteMovies: MutableList<Int> = mutableListOf()
 
     fun fetchPopularMovies(): Flow<PagingData<PopularMovie>> {
         return repo.fetchPopularMovies()
     }
 
     fun fetchMovieById(id: Int) {
-        movieLiveData = repo.fetchMovieById(id)
+        //movieLiveData = repo.fetchMovieById(id)
+        val movieFromApi = repo.fetchMovieById(id)
+        if (favoriteMovies.contains(movieFromApi.value?.id)) {
+            movieFromApi.value?.favorited = true
+        }
+        movieLiveData = movieFromApi
+    }
+
+    fun movieFavoriteButtonClicked() {
+        val movieId = movieLiveData.value?.id
+        if(movieId != null) {
+            if(favoriteMovies.contains(movieId)) {
+                favoriteMovies.remove(movieId)
+            } else {
+                favoriteMovies.add(movieId)
+            }
+        }
+        movieLiveData.value = movieLiveData.value?.apply {
+            favorited = !favoriteMovies.contains(movieId)
+        }
     }
 }

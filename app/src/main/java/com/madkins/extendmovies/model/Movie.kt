@@ -3,6 +3,7 @@ package com.madkins.extendmovies.model
 import com.google.gson.annotations.SerializedName
 
 class Movie{
+    var favorited: Boolean = false
     var id: Int = 0
     var title: String = ""
     var overview: String = ""

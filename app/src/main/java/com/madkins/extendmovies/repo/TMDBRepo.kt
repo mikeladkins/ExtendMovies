@@ -26,7 +26,7 @@ class TMDBRepo {
         ){TMDBPagingSource(service)}.flow
     }
 
-    fun fetchMovieById(id: Int): LiveData<Movie> {
+    fun fetchMovieById(id: Int): MutableLiveData<Movie> {
         val request = service.fetchMovieById(id)
         val responseLiveData: MutableLiveData<Movie> = MutableLiveData()
 

@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.madkins.extendmovies.R
@@ -33,6 +30,7 @@ class DetailedMovieFragment: Fragment() {
     private lateinit var revenue: TextView
     private lateinit var layout: FrameLayout
     private lateinit var upButton: ImageButton
+    private lateinit var favoriteButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,10 +52,15 @@ class DetailedMovieFragment: Fragment() {
         revenue = view.findViewById(R.id.detailed_movie_revenue)
         layout = view.findViewById(R.id.detailed_movie_upper_layout)
         upButton = view.findViewById(R.id.detailed_movie_up_button)
+        favoriteButton = view.findViewById(R.id.detailed_movie_favorite_button)
 
         upButton.setOnClickListener {
             // Navigate back to the popular movies fragment
             requireActivity().supportFragmentManager.popBackStack()
+        }
+
+        favoriteButton.setOnClickListener {
+            viewModel.movieFavoriteButtonClicked()
         }
 
         // Observe the movie livedata as it comes back from the API
@@ -94,7 +97,6 @@ class DetailedMovieFragment: Fragment() {
                 override fun onError(e: Exception?) {
                     Log.d(TAG, "Failed to attach image to layout background")
                 }
-
             })
         Picasso.get()
             .load(posterUrl)
@@ -104,5 +106,6 @@ class DetailedMovieFragment: Fragment() {
         overview.text = movie.overview
         date.text = movie.releaseDate
         revenue.text = "$${movie.revenue}"
+        if(movie.favorited) {favoriteButton.text = "Favorited"} else {favoriteButton.text = "Favorite"}
     }
 }
