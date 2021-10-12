@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/up_button_background.xml" value="0.16145833333333334" />
+        <entry key="app/src/main/res/layout-land/fragment_detailed_movie.xml" value="0.2495590828924162" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13627152988855115" />
         <entry key="app/src/main/res/layout/activity_popular_movies.xml" value="0.21934945788156798" />
         <entry key="app/src/main/res/layout/fragment_detailed_movie.xml" value="0.375" />

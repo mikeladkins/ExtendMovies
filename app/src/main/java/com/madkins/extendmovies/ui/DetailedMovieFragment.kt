@@ -39,8 +39,8 @@ class DetailedMovieFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Forcing this screen into portrait mode for the time being, not a good workaround
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        /*// Forcing this screen into portrait mode for the time being, not a good workaround
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT*/
         return inflater.inflate(R.layout.fragment_detailed_movie, container, false)
     }
 
@@ -73,8 +73,8 @@ class DetailedMovieFragment: Fragment() {
     }
 
     override fun onDestroyView() {
-        // Releasing the forced portrait mode
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        /*// Releasing the forced portrait mode
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED*/
         super.onDestroyView()
     }
 
